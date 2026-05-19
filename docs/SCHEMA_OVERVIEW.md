@@ -35,3 +35,9 @@ Note: the JSON schema describes the normalized/intermediate document form, not r
 - object references should resolve within the same assembly scope
 
 See `schema/cadml.schema.json` for the machine-readable draft.
+
+## Source-to-Normalized Mapping Note
+- Source CADML example syntax like `attach: Base.top` is expected to normalize into a relationship object:
+  - `type: attach`
+  - `target: Base.top`
+- This keeps source authoring concise while preserving deterministic structured representation for validation.
