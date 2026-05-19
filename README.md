@@ -1,5 +1,7 @@
 # CadMl
+
 A new way to design things using structured language instead of complex CAD workflows.
+
 # CADML
 
 Declarative, AI-native CAD language for engineering design.
@@ -93,119 +95,85 @@ assembly MotorMount {
 ### 1. AI-Friendly
 
 CADML should be:
-
-deterministic
-
-schema-validatable
-
-composable
-
-semantically meaningful
-
-tolerant during authoring
-
-strict during compilation
-
-
+- deterministic
+- schema-validatable
+- composable
+- semantically meaningful
+- tolerant during authoring
+- strict during compilation
 
 ---
 
 ### 2. Declarative
 
 Users describe:
-
-objects
-
-relationships
-
-constraints
-
-manufacturing intent
-
+- objects
+- relationships
+- constraints
+- manufacturing intent
 
 NOT low-level geometry operations.
 
 Bad:
-
+```cadml
 extrude(line(...))
+```
 
 Good:
-
+```cadml
 beam width=40mm height=80mm
-
+```
 
 ---
 
 ### 3. Semantic Engineering Objects
 
 CADML prefers:
-
-wall
-
-beam
-
-plate
-
-shaft
-
-bolt
-
-gear
-
-pipe
-
-bracket
-
+- wall
+- beam
+- plate
+- shaft
+- bolt
+- gear
+- pipe
+- bracket
 
 instead of raw vertices and faces.
-
 
 ---
 
 ### 4. Constraint-Driven
 
 Geometry should emerge from:
-
-dimensions
-
-relationships
-
-constraints
-
-engineering rules
-
+- dimensions
+- relationships
+- constraints
+- engineering rules
 
 Example:
-
+```cadml
 gear {
   teeth: 24
   module: 2
 }
+```
 
 The compiler computes actual geometry.
-
 
 ---
 
 ### 5. Compiler-Based
 
 CADML source should compile into:
-
-STEP
-
-STL
-
-DWG
-
-DXF
-
-SVG
-
-IFC
-
+- STEP
+- STL
+- DWG
+- DXF
+- SVG
+- IFC
 
 Potential pipeline:
-
+```
 CADML
   ↓
 AST
@@ -215,74 +183,53 @@ Constraint Solver
 Geometry Kernel
   ↓
 Export Pipeline
-
-
----
-
-Proposed Architecture
-
-Frontend
-
-Parser
-
-PEG parser
-
-AST generation
-
-schema validation
-
-
-Language Features
-
-indentation-based blocks
-
-minimal punctuation
-
-reusable components
-
-imports/modules
-
-constraint expressions
-
-
+```
 
 ---
 
-Core Engine
+## Proposed Architecture
 
-Constraint Solver
+### Frontend
+
+**Parser**
+- PEG parser
+- AST generation
+- schema validation
+
+### Language Features
+- indentation-based blocks
+- minimal punctuation
+- reusable components
+- imports/modules
+- constraint expressions
+
+---
+
+## Core Engine
+
+### Constraint Solver
 
 Responsible for:
+- dimensions
+- alignments
+- relationships
+- dependencies
 
-dimensions
-
-alignments
-
-relationships
-
-dependencies
-
-
-Geometry Kernel
+### Geometry Kernel
 
 Potential backends:
-
-OpenCascade
-
-CGAL
-
-Parasolid (future)
-
-
+- OpenCascade
+- CGAL
+- Parasolid (future)
 
 ---
 
-AI Layer
+## AI Layer
 
 CADML is designed for structured LLM generation.
 
 Recommended workflow:
-
+```
 Prompt
   ↓
 Structured AST generation
@@ -292,27 +239,22 @@ Schema validation
 Repair loop
   ↓
 Compilation
+```
 
 Avoid freeform geometry generation.
 
-
 ---
 
-Syntax Philosophy
+## Syntax Philosophy
 
 CADML should feel:
-
-readable like YAML
-
-composable like Compose
-
-strict like SQL schemas
-
-flexible like HTML authoring
-
+- readable like YAML
+- composable like Compose
+- strict like SQL schemas
+- flexible like HTML authoring
 
 Example:
-
+```cadml
 room Bedroom {
   size: [4m, 5m]
   wallHeight: 3m
@@ -322,203 +264,149 @@ room Bedroom {
     position: north
   }
 }
-
+```
 
 ---
 
-Why Existing CAD Is Difficult For AI
+## Why Existing CAD Is Difficult For AI
 
 Traditional CAD systems are:
-
-procedural
-
-GUI-heavy
-
-topology-centric
-
-legacy-oriented
-
-difficult to diff/version-control
-
+- procedural
+- GUI-heavy
+- topology-centric
+- legacy-oriented
+- difficult to diff/version-control
 
 AI struggles with:
-
-mouse actions
-
-procedural geometry APIs
-
-hidden constraints
-
-implicit relationships
-
+- mouse actions
+- procedural geometry APIs
+- hidden constraints
+- implicit relationships
 
 CADML externalizes intent into text.
 
-
 ---
 
-Potential Features
+## Potential Features
 
-Parametric Design
+### Parametric Design
 
+```cadml
 param width = 120mm
 
 plate {
   width: width
   height: width * 2
 }
-
+```
 
 ---
 
-Reusable Components
+### Reusable Components
 
+```cadml
 component BoltPattern {
   count: 4
   spacing: 40mm
 }
-
+```
 
 ---
 
-Material System
+### Material System
 
+```cadml
 material: Steel.A36
 finish: anodized
-
+```
 
 ---
 
-Manufacturing Rules
+### Manufacturing Rules
 
+```cadml
 constraints {
   manufacturable: injection_molding
   minWallThickness: 2mm
 }
-
-
----
-
-Long-Term Goals
-
-AI-native CAD workflows
-
-Git-friendly engineering
-
-deterministic geometry compilation
-
-open engineering schemas
-
-browser-based CAD
-
-collaborative engineering
-
-simulation-aware design
-
-manufacturability validation
-
-
+```
 
 ---
 
-Non-Goals
+## Long-Term Goals
+
+- AI-native CAD workflows
+- Git-friendly engineering
+- deterministic geometry compilation
+- open engineering schemas
+- browser-based CAD
+- collaborative engineering
+- simulation-aware design
+- manufacturability validation
+
+---
+
+## Non-Goals
 
 CADML is NOT intended to:
-
-replace all CAD tools immediately
-
-generate magic perfect engineering automatically
-
-remove engineers from engineering workflows
-
+- replace all CAD tools immediately
+- generate magic perfect engineering automatically
+- remove engineers from engineering workflows
 
 Human validation remains critical.
 
+---
+
+## MVP Roadmap
+
+### Phase 1
+- parser
+- AST
+- basic primitives
+- STL export
+
+### Phase 2
+- parametric constraints
+- OpenCascade backend
+- browser renderer
+
+### Phase 3
+- semantic engineering objects
+- manufacturing constraints
+- AI repair loops
+
+### Phase 4
+- STEP/DWG export
+- collaboration
+- simulation integration
 
 ---
 
-MVP Roadmap
+## Tech Stack Ideas
 
-Phase 1
+### Language
+- Rust
+- Kotlin
+- TypeScript
 
-parser
+### Geometry
+- OpenCascade
+- CadQuery backend
 
-AST
+### Rendering
+- Three.js
+- WebGPU
 
-basic primitives
-
-STL export
-
-
-Phase 2
-
-parametric constraints
-
-OpenCascade backend
-
-browser renderer
-
-
-Phase 3
-
-semantic engineering objects
-
-manufacturing constraints
-
-AI repair loops
-
-
-Phase 4
-
-STEP/DWG export
-
-collaboration
-
-simulation integration
-
-
+### AI Integration
+- JSON schema validation
+- constrained decoding
+- AST repair system
 
 ---
 
-Tech Stack Ideas
+## Example Future Workflow
 
-Language
-
-Rust
-
-Kotlin
-
-TypeScript
-
-
-Geometry
-
-OpenCascade
-
-CadQuery backend
-
-
-Rendering
-
-Three.js
-
-WebGPU
-
-
-AI Integration
-
-JSON schema validation
-
-constrained decoding
-
-AST repair system
-
-
-
----
-
-Example Future Workflow
-
+```
 User Prompt
     ↓
 LLM generates CADML
@@ -530,80 +418,55 @@ Compiler resolves constraints
 Geometry engine builds solids
     ↓
 Exports STEP/STL/DWG
-
+```
 
 ---
 
-Repository Status
+## Repository Status
 
 Early concept stage.
 
 Researching:
-
-syntax design
-
-compiler architecture
-
-semantic geometry
-
-AI-assisted engineering workflows
-
-
+- syntax design
+- compiler architecture
+- semantic geometry
+- AI-assisted engineering workflows
 
 ---
 
-License
+## License
 
 MIT
 
-
 ---
 
-Contributing
+## Contributing
 
 Open to:
-
-CAD engineers
-
-geometry programmers
-
-compiler developers
-
-AI engineers
-
-manufacturing experts
-
-UI/UX contributors
-
-
+- CAD engineers
+- geometry programmers
+- compiler developers
+- AI engineers
+- manufacturing experts
+- UI/UX contributors
 
 ---
 
-Inspiration
+## Inspiration
 
 Projects and ideas that influenced CADML:
-
-OpenSCAD
-
-CadQuery
-
-FreeCAD
-
-IFC/BIM systems
-
-Jetpack Compose
-
-React
-
-HTML/CSS
-
-parametric CAD systems
-
-
+- OpenSCAD
+- CadQuery
+- FreeCAD
+- IFC/BIM systems
+- Jetpack Compose
+- React
+- HTML/CSS
+- parametric CAD systems
 
 ---
 
-Final Idea
+## Final Idea
 
 Web development evolved from:
 
