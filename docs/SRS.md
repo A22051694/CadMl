@@ -25,7 +25,7 @@ CADML covers:
 5. Produce normalized intermediate representation for downstream geometry backends.
 
 ## 5. Non-Functional Requirements
-- Determinism for same input + version.
+- Deterministic output for the same input + version.
 - Human-readable and AI-friendly syntax.
 - Clear validation errors.
 - Composability of language blocks.

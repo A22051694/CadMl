@@ -3,25 +3,50 @@
   "$id": "https://cadml.dev/schema/cadml.schema.json",
   "title": "CADML Document",
   "type": "object",
-  "required": ["version", "kind", "name", "objects"],
+  "required": [
+    "version",
+    "kind",
+    "name",
+    "objects"
+  ],
   "additionalProperties": false,
   "properties": {
-    "version": { "type": "string" },
-    "kind": { "type": "string", "const": "assembly" },
-    "name": { "type": "string", "minLength": 1 },
+    "version": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string",
+      "const": "assembly"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
     "objects": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["type", "properties"],
+        "required": [
+          "type",
+          "properties"
+        ],
         "additionalProperties": false,
         "properties": {
-          "type": { "type": "string", "minLength": 1 },
-          "name": { "type": "string" },
-          "properties": { "type": "object" },
+          "type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "object"
+          },
           "relationships": {
             "type": "array",
-            "items": { "type": "object" }
+            "items": {
+              "type": "object"
+            }
           }
         }
       }
@@ -30,11 +55,21 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["type"],
+        "required": [
+          "type"
+        ],
         "properties": {
-          "type": { "type": "string" },
-          "target": {},
-          "params": { "type": "object" }
+          "type": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Target object or selector within assembly scope"
+          },
+          "params": {
+            "type": "object"
+          }
         },
         "additionalProperties": false
       }
