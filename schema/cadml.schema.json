@@ -12,7 +12,9 @@
   "additionalProperties": false,
   "properties": {
     "version": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Schema version in semver format, e.g. 1.0.0"
     },
     "kind": {
       "type": "string",
@@ -34,13 +36,57 @@
         "properties": {
           "type": {
             "type": "string",
-            "minLength": 1
+            "enum": [
+              "wall",
+              "beam",
+              "shaft",
+              "gear",
+              "bolt",
+              "plate",
+              "pipe",
+              "bracket",
+              "joint"
+            ]
           },
           "name": {
             "type": "string"
           },
           "properties": {
-            "type": "object"
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "unit"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "type": "number"
+                    },
+                    "unit": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              ]
+            }
           },
           "relationships": {
             "type": "array",
@@ -68,7 +114,40 @@
             "description": "Target object or selector within assembly scope"
           },
           "params": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "value",
+                    "unit"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "type": "number"
+                    },
+                    "unit": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              ]
+            }
           }
         },
         "additionalProperties": false
