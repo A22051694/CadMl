@@ -57,17 +57,19 @@ Agents should optimize for:
 Prefer:
 ```cadml
 wall length=4m
+```
 
 Over:
-
+```cadml
 extrude(line(...))
+```
 
 Engineering intent matters more than geometric primitives.
 
 
 ---
 
-2. Declarative Syntax
+## 2. Declarative Syntax
 
 CADML should describe:
 
@@ -99,7 +101,7 @@ beam {
 
 ---
 
-3. AI-Friendly Structure
+## 3. AI-Friendly Structure
 
 AI systems perform best with:
 
@@ -133,20 +135,10 @@ Architectural Priorities
 Priority order:
 
 1. Parser simplicity
-
-
 2. AST consistency
-
-
 3. Constraint system
-
-
 4. Semantic modeling
-
-
 5. Geometry backend
-
-
 6. Rendering/UI
 
 
@@ -304,17 +296,9 @@ When Extending Syntax
 Before adding syntax:
 
 1. Does it improve semantic clarity?
-
-
 2. Is it deterministic?
-
-
 3. Is it AI-friendly?
-
-
 4. Can it be validated cleanly?
-
-
 5. Does it compose well?
 
 

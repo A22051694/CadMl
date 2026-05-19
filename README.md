@@ -88,9 +88,9 @@ assembly MotorMount {
 
 ---
 
-Design Goals
+## Design Goals
 
-1. AI-Friendly
+### 1. AI-Friendly
 
 CADML should be:
 
@@ -110,7 +110,7 @@ strict during compilation
 
 ---
 
-2. Declarative
+### 2. Declarative
 
 Users describe:
 
@@ -136,7 +136,7 @@ beam width=40mm height=80mm
 
 ---
 
-3. Semantic Engineering Objects
+### 3. Semantic Engineering Objects
 
 CADML prefers:
 
@@ -162,7 +162,7 @@ instead of raw vertices and faces.
 
 ---
 
-4. Constraint-Driven
+### 4. Constraint-Driven
 
 Geometry should emerge from:
 
@@ -187,7 +187,7 @@ The compiler computes actual geometry.
 
 ---
 
-5. Compiler-Based
+### 5. Compiler-Based
 
 CADML source should compile into:
 
