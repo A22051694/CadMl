@@ -53,6 +53,7 @@
           },
           "properties": {
             "type": "object",
+            "description": "Semantic object attributes (dimensions, material, and domain properties)",
             "minProperties": 1,
             "additionalProperties": {
               "oneOf": [
@@ -81,7 +82,15 @@
                     },
                     "unit": {
                       "type": "string",
-                      "minLength": 1
+                      "enum": [
+                        "mm",
+                        "cm",
+                        "m",
+                        "in",
+                        "ft",
+                        "deg",
+                        "rad"
+                      ]
                     }
                   }
                 }
@@ -91,7 +100,66 @@
           "relationships": {
             "type": "array",
             "items": {
-              "type": "object"
+              "type": "object",
+              "required": [
+                "type",
+                "target"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "target": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "params": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "unit"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "value": {
+                            "type": "number"
+                          },
+                          "unit": {
+                            "type": "string",
+                            "enum": [
+                              "mm",
+                              "cm",
+                              "m",
+                              "in",
+                              "ft",
+                              "deg",
+                              "rad"
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
             }
           }
         }
