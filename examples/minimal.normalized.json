@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "kind": "assembly",
+  "name": "MinimalBracket",
+  "objects": [
+    {
+      "type": "plate",
+      "name": "Base",
+      "properties": {
+        "width": { "value": 100, "unit": "mm" },
+        "height": { "value": 60, "unit": "mm" },
+        "thickness": { "value": 6, "unit": "mm" }
+      }
+    },
+    {
+      "type": "bracket",
+      "name": "Support",
+      "properties": {
+        "angle": { "value": 90, "unit": "deg" },
+        "thickness": { "value": 6, "unit": "mm" }
+      },
+      "relationships": [
+        {
+          "type": "attach",
+          "target": "Base.top"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "type": "manufacturable",
+      "params": {
+        "process": "cnc"
+      }
+    }
+  ]
+}

@@ -2,6 +2,8 @@
 
 This document explains the first schema boundary for CADML.
 
+Note: the JSON schema describes the normalized/intermediate document form, not raw `.cadml` source syntax directly.
+
 ## Goals
 - deterministic validation
 - explicit typing

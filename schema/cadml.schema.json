@@ -1,14 +1,37 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://cadml.dev/schema/cadml.schema.json",
-  "title": "CADML Document",
+  "title": "CADML Normalized Document",
   "type": "object",
-  "required": [
-    "version",
-    "kind",
-    "name",
-    "objects"
-  ],
+  "$defs": {
+    "unit": {
+      "type": "string",
+      "enum": ["mm", "cm", "m", "in", "ft", "deg", "rad"]
+    },
+    "valueWithUnit": {
+      "type": "object",
+      "required": ["value", "unit"],
+      "additionalProperties": false,
+      "properties": {
+        "value": { "type": "number" },
+        "unit": { "$ref": "#/$defs/unit" }
+      }
+    },
+    "scalarOrUnitValue": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "number" },
+        { "type": "integer" },
+        { "type": "boolean" },
+        { "$ref": "#/$defs/valueWithUnit" }
+      ]
+    },
+    "paramMap": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/scalarOrUnitValue" }
+    }
+  },
+  "required": ["version", "kind", "name", "objects"],
   "additionalProperties": false,
   "properties": {
     "version": {
@@ -28,25 +51,12 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": [
-          "type",
-          "properties"
-        ],
+        "required": ["type", "properties"],
         "additionalProperties": false,
         "properties": {
           "type": {
             "type": "string",
-            "enum": [
-              "wall",
-              "beam",
-              "shaft",
-              "gear",
-              "bolt",
-              "plate",
-              "pipe",
-              "bracket",
-              "joint"
-            ]
+            "enum": ["wall", "beam", "shaft", "gear", "bolt", "plate", "pipe", "bracket", "joint"]
           },
           "name": {
             "type": "string"
@@ -54,57 +64,13 @@
           "properties": {
             "type": "object",
             "description": "Semantic object attributes (dimensions, material, and domain properties)",
-            "minProperties": 1,
-            "additionalProperties": {
-              "oneOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "value",
-                    "unit"
-                  ],
-                  "additionalProperties": false,
-                  "properties": {
-                    "value": {
-                      "type": "number"
-                    },
-                    "unit": {
-                      "type": "string",
-                      "enum": [
-                        "mm",
-                        "cm",
-                        "m",
-                        "in",
-                        "ft",
-                        "deg",
-                        "rad"
-                      ]
-                    }
-                  }
-                }
-              ]
-            }
+            "additionalProperties": { "$ref": "#/$defs/scalarOrUnitValue" }
           },
           "relationships": {
             "type": "array",
             "items": {
               "type": "object",
-              "required": [
-                "type",
-                "target"
-              ],
+              "required": ["type", "target"],
               "additionalProperties": false,
               "properties": {
                 "type": {
@@ -115,50 +81,7 @@
                   "type": "string",
                   "minLength": 1
                 },
-                "params": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "oneOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "integer"
-                      },
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "value",
-                          "unit"
-                        ],
-                        "additionalProperties": false,
-                        "properties": {
-                          "value": {
-                            "type": "number"
-                          },
-                          "unit": {
-                            "type": "string",
-                            "enum": [
-                              "mm",
-                              "cm",
-                              "m",
-                              "in",
-                              "ft",
-                              "deg",
-                              "rad"
-                            ]
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
+                "params": { "$ref": "#/$defs/paramMap" }
               }
             }
           }
@@ -169,9 +92,8 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": [
-          "type"
-        ],
+        "required": ["type"],
+        "additionalProperties": false,
         "properties": {
           "type": {
             "type": "string"
@@ -181,44 +103,8 @@
             "minLength": 1,
             "description": "Target object or selector within assembly scope"
           },
-          "params": {
-            "type": "object",
-            "additionalProperties": {
-              "oneOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "value",
-                    "unit"
-                  ],
-                  "additionalProperties": false,
-                  "properties": {
-                    "value": {
-                      "type": "number"
-                    },
-                    "unit": {
-                      "type": "string",
-                      "minLength": 1
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "additionalProperties": false
+          "params": { "$ref": "#/$defs/paramMap" }
+        }
       }
     }
   }

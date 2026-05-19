@@ -624,4 +624,5 @@ CAD may eventually follow the same transition.
 - [References](docs/REFERENCES.md)
 - [Scaffold Notes (TXT)](docs/Scaffold_NOTES.txt)
 - [Draft JSON Schema](schema/cadml.schema.json)
-- [Minimal CADML Example](examples/minimal.cadml)
+- [Minimal CADML Source Example](examples/minimal.cadml)
+- [Minimal Normalized JSON Example](examples/minimal.normalized.json)
