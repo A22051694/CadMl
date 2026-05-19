@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cadml.dev/schema/cadml.schema.json",
+  "title": "CADML Document",
+  "type": "object",
+  "required": ["version", "kind", "name", "objects"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "string" },
+    "kind": { "type": "string", "const": "assembly" },
+    "name": { "type": "string", "minLength": 1 },
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "properties"],
+        "additionalProperties": false,
+        "properties": {
+          "type": { "type": "string", "minLength": 1 },
+          "name": { "type": "string" },
+          "properties": { "type": "object" },
+          "relationships": {
+            "type": "array",
+            "items": { "type": "object" }
+          }
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": { "type": "string" },
+          "target": {},
+          "params": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

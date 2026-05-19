@@ -614,3 +614,14 @@ to:
 declarative structured systems
 
 CAD may eventually follow the same transition.
+
+---
+
+## Scaffold Documents
+
+- [SRS](docs/SRS.md)
+- [Schema Overview](docs/SCHEMA_OVERVIEW.md)
+- [References](docs/REFERENCES.md)
+- [Scaffold Notes (txt)](docs/SCaffold_NOTES.txt)
+- [Draft JSON Schema](schema/cadml.schema.json)
+- [Minimal CADML Example](examples/minimal.cadml)

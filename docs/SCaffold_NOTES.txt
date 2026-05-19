@@ -1,0 +1,16 @@
+CADML Scaffold Notes
+====================
+
+This repository is at an architecture-first stage.
+
+Current scaffold pack includes:
+- SRS (docs/SRS.md)
+- schema overview (docs/SCHEMA_OVERVIEW.md)
+- references (docs/REFERENCES.md)
+- draft JSON schema (schema/cadml.schema.json)
+- minimal example source (examples/minimal.cadml)
+
+Next scaffold candidates:
+- AST node catalog
+- constraint expression grammar notes
+- error code taxonomy

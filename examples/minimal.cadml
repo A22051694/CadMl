@@ -1,0 +1,15 @@
+assembly MinimalBracket {
+  plate Base {
+    size: [100mm, 60mm, 6mm]
+  }
+
+  bracket Support {
+    attach: Base.top
+    angle: 90deg
+    thickness: 6mm
+  }
+
+  constraints {
+    manufacturable: cnc
+  }
+}
